@@ -129,6 +129,14 @@ Within every 10-second temporal segment, the crowd dynamics are categorized into
 
 ## 4. Mathematical Formulation & Algorithmic Pipeline
 
+### Deep Learning Pedestrian Detector (YOLOv8)
+
+The foundation of the detection pipeline is **YOLOv8** (Ultralytics), an anchor-free convolutional architecture that extracts high-level semantic features and performs multi-scale bounding box regression in real time:
+
+<p align="center">
+  <img src="Guide/yolov8_architecture.jpg" alt="YOLOv8 Deep Learning Model Architecture" width="100%">
+</p>
+
 ### Step 1: Pedestrian Centroid Extraction
 Each frame $t$ is processed by YOLOv8. For each detection of class `person` (`cls == 0`) with confidence score $\ge 0.20$, bounding box coordinates are extracted as $[x, y, w, h]$.
 
@@ -213,7 +221,8 @@ CROWD_DETECTION_SINGLE_CAMERA/
 ├── Guide/                                   # Documentation & Academic Assets Hub
 │   ├── Chandan Msc project report.pdf       # 44-page University of Calcutta Master's thesis
 │   ├── SYSTEM-ARCHITECTURE.md               # In-depth architectural design specification & diagrams
-│   └── system_architecture.jpg              # High-resolution modern system architecture infographic
+│   ├── system_architecture.jpg              # High-resolution modern system architecture infographic
+│   └── yolov8_architecture.jpg              # YOLOv8 deep learning model architecture diagram
 │
 ├── .idea/                                   # PyCharm project configuration files
 │

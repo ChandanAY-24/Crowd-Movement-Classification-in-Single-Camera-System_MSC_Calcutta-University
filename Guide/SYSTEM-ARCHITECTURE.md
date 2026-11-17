@@ -165,6 +165,25 @@ flowchart TD
 
 ---
 
+### 2.1 Deep Learning Detection Subsystem (YOLOv8)
+
+The pedestrian detection subsystem utilizes the **YOLOv8** (Ultralytics) deep learning architecture. Below is the detailed architecture infographic depicting the multi-scale feature extraction, path aggregation neck, and anchor-free decoupled detection head:
+
+<p align="center">
+  <img src="yolov8_architecture.jpg" alt="YOLOv8 Deep Learning Model Architecture" width="100%">
+</p>
+
+#### YOLOv8 Subsystem Components:
+- **Input Processing**: High-resolution video frames (e.g., $640 \times 640 \times 3$) decoded via OpenCV.
+- **Backbone (Modified CSPDarknet53)**: Hierarchical feature extraction utilizing standard convolutions, `C2f` (Cross Stage Partial with 2 Convolutions) modules for gradient flow preservation, and `SPPF` (Spatial Pyramid Pooling - Fast) for multi-receptive field context pooling.
+- **Neck (PAN-FPN)**: Path Aggregation Feature Pyramid Network enabling bidirectional multi-scale feature propagation, fusing high-resolution spatial details with high-level semantic abstractions across scale levels $P_3, P_4, P_5$.
+- **Decoupled Anchor-Free Head**: Isolates classification and bounding-box regression into separate convolutional heads:
+  - *Classification Branch*: Uses Binary Cross-Entropy (BCE) Loss to predict class probabilities ($c = \text{person}$).
+  - *Box Regression Branch*: Leverages Distribution Focal Loss (DFL) and Complete Intersection over Union (CIoU) Loss for sub-pixel boundary localization.
+- **Inference Runtime**: Executed via PyTorch with CUDA acceleration (`cuda:0` on NVIDIA RTX 3050), supporting instant stub serialization via Python `pickle`.
+
+---
+
 ## 3. Component & Class Decomposition
 
 The architecture is strictly separated into single-responsibility functional units:
