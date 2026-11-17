@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Model weights & large cached artifacts
+*.pt
+*.pth
+*.pkl
+*.joblib
+
+# Generated outputs & logs
+plots/
+results/
+bboxes_output.csv
+*.log
